@@ -147,12 +147,18 @@ window.addEventListener("load", () => {
     columns.forEach(column => {
         new Sortable(column, {
             group: "tasks",
-            animation: 150,
             draggable: ".task",
+
+            animation: 300,          // smooth movement
+            easing: "cubic-bezier(0.19,1,0.22,1)",
+
+            delay: 120,              // mobile par drag thoda delay se start
+            delayOnTouchOnly: true,
+
             ghostClass: "hover-over",
 
-            filter: "button",   // button ko drag se ignore karega
-            preventOnFilter: false, // button click allow karega
+            filter: "button",
+            preventOnFilter: false,
 
             onEnd: function () {
                 if (typeof updatetaskCount === "function") {
