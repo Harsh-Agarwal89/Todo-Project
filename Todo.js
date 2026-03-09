@@ -134,3 +134,5 @@ addTaskButton.addEventListener("click", () => {
     document.querySelector("#task-desc-input").value = ""
 
 })
+
+
