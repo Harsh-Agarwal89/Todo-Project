@@ -136,36 +136,34 @@ addTaskButton.addEventListener("click", () => {
 })
 
 // Mobile drag support without changing existing code
-window.addEventListener("load", () => {
+// Mobile drag support only
+if (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)) {
 
-    const todoCol = document.querySelector("#todo");
-    const progressCol = document.querySelector("#progress");
-    const doneCol = document.querySelector("#done");
+    window.addEventListener("load", () => {
 
-    const columns = [todoCol, progressCol, doneCol];
+        const todoCol = document.querySelector("#todo");
+        const progressCol = document.querySelector("#progress");
+        const doneCol = document.querySelector("#done");
 
-    columns.forEach(column => {
-        new Sortable(column, {
-            group: "tasks",
-            draggable: ".task",
+        const columns = [todoCol, progressCol, doneCol];
 
-            animation: 300,          // smooth movement
-            easing: "cubic-bezier(0.19,1,0.22,1)",
+        columns.forEach(column => {
+            new Sortable(column, {
+                group: "tasks",
+                draggable: ".task",
+                animation: 150,
 
-            delay: 120,              // mobile par drag thoda delay se start
-            delayOnTouchOnly: true,
+                filter: "button",
+                preventOnFilter: false,
 
-            ghostClass: "hover-over",
-
-            filter: "button",
-            preventOnFilter: false,
-
-            onEnd: function () {
-                if (typeof updatetaskCount === "function") {
-                    updatetaskCount();
+                onEnd: function () {
+                    if (typeof updatetaskCount === "function") {
+                        updatetaskCount();
+                    }
                 }
-            }
+            });
         });
+
     });
 
-});
+}
