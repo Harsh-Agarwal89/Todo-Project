@@ -135,4 +135,28 @@ addTaskButton.addEventListener("click", () => {
 
 })
 
+// Mobile drag support without changing existing code
+window.addEventListener("load", () => {
 
+    const todoCol = document.querySelector("#todo");
+    const progressCol = document.querySelector("#progress");
+    const doneCol = document.querySelector("#done");
+
+    const columns = [todoCol, progressCol, doneCol];
+
+    columns.forEach(column => {
+        new Sortable(column, {
+            group: "tasks",
+            animation: 150,
+            draggable: ".task",
+            ghostClass: "hover-over",
+
+            onEnd: function () {
+                if (typeof updatetaskCount === "function") {
+                    updatetaskCount();
+                }
+            }
+        });
+    });
+
+});
