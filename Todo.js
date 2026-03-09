@@ -151,6 +151,9 @@ window.addEventListener("load", () => {
             draggable: ".task",
             ghostClass: "hover-over",
 
+            filter: "button",   // button ko drag se ignore karega
+            preventOnFilter: false, // button click allow karega
+
             onEnd: function () {
                 if (typeof updatetaskCount === "function") {
                     updatetaskCount();
